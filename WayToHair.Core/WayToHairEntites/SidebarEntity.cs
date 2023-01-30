@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WayToHair.Core
+namespace WayToHair.Core.WayToHairEntites
 {
     public class SidebarEntity : BaseEntity
     {

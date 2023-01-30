@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace WayToHair.Core.WayToHairEntites
 {
-    public class FaqEntity : BaseEntity
+    public class ContentEntity :  BaseEntity
     {
-        public long? ParentId { get; set; }
-        public string Question { get; set; }
-        public string Answer { get; set; }
-        public bool IsView { get; set; }
+        public string Description { get; set; }
+        public string Title { get; set; }
+        public string IsView { get; set; }
         public int Sequence { get; set; }
     }
 }

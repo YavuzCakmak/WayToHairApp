@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WayToHair.Core;
+using WayToHair.Core.WayToHairEntites;
 
 namespace WayToHair.Repository
 {
@@ -18,5 +13,6 @@ namespace WayToHair.Repository
         public DbSet<ContactEntity> ContactEntity { get; set; }
         public DbSet<FaqEntity> FaqEntity { get; set; }
         public DbSet<SidebarEntity> SidebarEntity { get; set; }
+        public DbSet<ContentEntity> ContentEntity { get; set; }
     }
 }
