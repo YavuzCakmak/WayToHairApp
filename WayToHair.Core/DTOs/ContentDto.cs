@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WayToHair.Core.WayToHairEntites
+namespace WayToHair.Core.DTOs
 {
-    public class ContentEntity :  BaseEntity
+    public class ContentDto : BaseDto
     {
         public long? SidebarId { get; set; }
         public string Description { get; set; }
