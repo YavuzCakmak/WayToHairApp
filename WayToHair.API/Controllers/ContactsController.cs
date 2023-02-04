@@ -10,9 +10,9 @@ namespace WayToHair.API.Controllers
     public class ContactsController : CustomBaseController
     {
         private readonly IMapper _mapper;
-        private readonly IService<ContactEntity> _service;
+        private readonly IContactService _service;
 
-        public ContactsController(IMapper mapper, IService<ContactEntity> service)
+        public ContactsController(IMapper mapper, IContactService service)
         {
             _mapper = mapper;
             _service = service;
@@ -38,14 +38,14 @@ namespace WayToHair.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(ContactDto contactDto)
         {
-            var contact = await _service.AddAsync(_mapper.Map<ContactEntity>(contactDto));
+            var contact = await _service.AddAsync(_mapper.Map<Contact>(contactDto));
             return CreateActionResult(CustomResponseDto<ContactDto>.Succces(200, _mapper.Map<ContactDto>(contact)));
         }
 
         [HttpPut]
         public async Task<IActionResult> Update(ContactDto contactDto)
         {
-            await _service.UpdateAsync(_mapper.Map<ContactEntity>(contactDto));
+            await _service.UpdateAsync(_mapper.Map<Contact>(contactDto));
             return CreateActionResult(CustomResponseDto<NoContentDto>.Succces(204));
         }
 

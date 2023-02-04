@@ -5,6 +5,7 @@ using WayToHair.Core.Services;
 using WayToHair.Core.UnitOfWorks;
 using WayToHair.Repository;
 using WayToHair.Repository.GenericRepository;
+using WayToHair.Repository.Repositories;
 using WayToHair.Repository.UnitOfWorks;
 using WayToHair.Service.Mapping;
 using WayToHair.Service.Services;
@@ -22,15 +23,21 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
 builder.Services.AddScoped(typeof(IService<>),typeof(Service<>));
 
+builder.Services.AddScoped<IContactRepository, ContactRepository>();
+builder.Services.AddScoped<IContactService, ConctactService>();
+
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
-builder.Services.AddDbContext<AppDbContext>(x =>
-{
-    x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"), option =>
-    {
-        option.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
-    });
-});
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 30));
+
+builder.Services.AddDbContext<AppDbContext>(
+            dbContextOptions => dbContextOptions
+                .UseMySql(builder.Configuration.GetConnectionString("SqlConnection"), serverVersion)
+                .LogTo(Console.WriteLine, LogLevel.Information)
+                .EnableSensitiveDataLogging()
+                .EnableDetailedErrors());
+
+
 
 var app = builder.Build();
 

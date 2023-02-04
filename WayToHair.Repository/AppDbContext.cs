@@ -11,7 +11,7 @@ namespace WayToHair.Repository
 
         }
 
-        public DbSet<ContactEntity> ContactEntity { get; set; }
+        public DbSet<Contact> Contact { get; set; }
         public DbSet<FaqEntity> FaqEntity { get; set; }
         public DbSet<SidebarEntity> SidebarEntity { get; set; }
         public DbSet<ContentEntity> ContentEntity { get; set; }
