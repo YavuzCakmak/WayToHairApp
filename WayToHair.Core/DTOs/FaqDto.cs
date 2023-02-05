@@ -8,7 +8,7 @@ namespace WayToHair.Core.DTOs
 {
     public class FaqDto : BaseDto
     {
-        public long? ParentId { get; set; }
+        public int? ParentId { get; set; }
         public string Question { get; set; }
         public string Answer { get; set; }
         public bool IsView { get; set; }

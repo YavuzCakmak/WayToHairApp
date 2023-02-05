@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using WayToHair.Core.Repositories;
 using WayToHair.Core.Services;
 using WayToHair.Core.UnitOfWorks;
+using WayToHair.Service.Exceptions;
 
 namespace WayToHair.Service.Services
 {
@@ -46,9 +47,14 @@ namespace WayToHair.Service.Services
             return await _repository.GetAll().ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(long id)
+        public async Task<T> GetByIdAsync(int id)
         {
-            return await _repository.GetByIdAsync(id);
+            var value = await _repository.GetByIdAsync(id);
+            if (value == null)
+            {
+                throw new ClientSideException($"{typeof(T).Name} not found");
+            }
+            return value;
         }
 
         public async Task RemoveAsync(T entity)
@@ -66,12 +72,12 @@ namespace WayToHair.Service.Services
         public async Task UpdateAsync(T entity)
         {
             _repository.Update(entity);
-            await _unitOfWork.CommitAsync();    
+            await _unitOfWork.CommitAsync();
         }
 
         public IQueryable<T> Where(Expression<Func<T, bool>> expression)
         {
-             return _repository.Where(expression);
+            return _repository.Where(expression);
         }
     }
 }

@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WayToHair.API.Filters;
 using WayToHair.Core.DTOs;
 using WayToHair.Core.Services;
 using WayToHair.Core.WayToHairEntites;
 
 namespace WayToHair.API.Controllers
 {
+    [ValidateFilterAttribute]
     public class ContactsController : CustomBaseController
     {
         private readonly IMapper _mapper;
@@ -26,8 +28,9 @@ namespace WayToHair.API.Controllers
             return CreateActionResult(CustomResponseDto<List<ContactDto>>.Succces(200, contactDtos));
         }
 
+        [ServiceFilter(typeof(NotFoundFilter<Contact>))]
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(long id)
+        public async Task<IActionResult> GetById(int id)
         {
             var contact = await _service.GetByIdAsync(id);
             var contactDto = _mapper.Map<ContactDto>(contact);
@@ -50,7 +53,7 @@ namespace WayToHair.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Remove(long id)
+        public async Task<IActionResult> Remove(int id)
         {
             var contactModel = await _service.GetByIdAsync(id);
             await _service.RemoveAsync(contactModel);

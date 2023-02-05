@@ -8,7 +8,7 @@ namespace WayToHair.Core.WayToHairEntites
 {
     public class FaqEntity : BaseEntity
     {
-        public long? ParentId { get; set; }
+        public int? ParentId { get; set; }
         public string Question { get; set; }
         public string Answer { get; set; }
         public bool IsView { get; set; }

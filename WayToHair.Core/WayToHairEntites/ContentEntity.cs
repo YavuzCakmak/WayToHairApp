@@ -8,7 +8,7 @@ namespace WayToHair.Core.WayToHairEntites
 {
     public class ContentEntity :  BaseEntity
     {
-        public long? SidebarId { get; set; }
+        public int? SidebarId { get; set; }
         public string Description { get; set; }
         public string Title { get; set; }
         public string IsView { get; set; }

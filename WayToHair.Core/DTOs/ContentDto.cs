@@ -8,7 +8,7 @@ namespace WayToHair.Core.DTOs
 {
     public class ContentDto : BaseDto
     {
-        public long? SidebarId { get; set; }
+        public int? SidebarId { get; set; }
         public string Description { get; set; }
         public string Title { get; set; }
         public string IsView { get; set; }

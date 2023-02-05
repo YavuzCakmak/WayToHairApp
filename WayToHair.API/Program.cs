@@ -1,6 +1,11 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
+using WayToHair.API.Filters;
+using WayToHair.API.Middlewares;
+using WayToHair.API.Modules;
 using WayToHair.Core.Repositories;
 using WayToHair.Core.Services;
 using WayToHair.Core.UnitOfWorks;
@@ -15,19 +20,17 @@ using WayToHair.Service.Validations;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddControllers().AddFluentValidation(x=> x.RegisterValidatorsFromAssemblyContaining<ContactDtoValidator>());
+builder.Services.AddControllers(options => options.Filters.Add(new ValidateFilterAttribute())).AddFluentValidation(x=> x.RegisterValidatorsFromAssemblyContaining<ContactDtoValidator>());
 
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
-builder.Services.AddScoped(typeof(IService<>),typeof(Service<>));
-
-builder.Services.AddScoped<IContactRepository, ContactRepository>();
-builder.Services.AddScoped<IContactService, ConctactService>();
-
+builder.Services.AddScoped(typeof(NotFoundFilter<>));
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 30));
@@ -40,10 +43,12 @@ builder.Services.AddDbContext<AppDbContext>(
                 .EnableDetailedErrors());
 
 
+//Default
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(containersBuilder => containersBuilder.RegisterModule(new RepoServiceModule()));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -52,6 +57,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCustomException();
 app.UseAuthorization();
 
 app.MapControllers();
