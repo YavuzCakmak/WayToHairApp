@@ -17,10 +17,10 @@ namespace WayToHair.Service.Services
         private readonly IContactRepository _contactRepository;
         private readonly IMapper _mapper;
 
-        public ConctactService(IGenericRepository<Contact> repoistory, IUnitOfWork unitOfWork, IMapper mapper, IContactRepository categoryRepository) : base(repoistory, unitOfWork)
+        public ConctactService(IGenericRepository<Contact> repoistory, IUnitOfWork unitOfWork, IMapper mapper, IContactRepository contactRepository) : base(repoistory, unitOfWork)
         {
             _mapper = mapper;
-            _contactRepository = categoryRepository;
+            _contactRepository = contactRepository;
         }
     }
 }
