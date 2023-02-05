@@ -16,7 +16,7 @@ namespace WayToHair.Service.Mapping
             CreateMap<Contact,ContactDto>().ReverseMap(); 
             CreateMap<Content,ContentDto>().ReverseMap(); 
             CreateMap<Faq,FaqDto>().ReverseMap(); 
-            CreateMap<SidebarEntity,SidebarDto>().ReverseMap(); 
+            CreateMap<Sidebar,SidebarDto>().ReverseMap(); 
         }
     }
 }
