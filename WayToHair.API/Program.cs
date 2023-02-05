@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using WayToHair.Core.Repositories;
@@ -9,13 +10,14 @@ using WayToHair.Repository.Repositories;
 using WayToHair.Repository.UnitOfWorks;
 using WayToHair.Service.Mapping;
 using WayToHair.Service.Services;
+using WayToHair.Service.Validations;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddControllers().AddFluentValidation(x=> x.RegisterValidatorsFromAssemblyContaining<ContactDtoValidator>());
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
