@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WayToHair.Core.WayToHairEntites
 {
-    public class ContentEntity :  BaseEntity
+    public class Content :  BaseEntity
     {
         public int? SidebarId { get; set; }
         public string Description { get; set; }

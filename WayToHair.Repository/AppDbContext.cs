@@ -12,9 +12,9 @@ namespace WayToHair.Repository
         }
 
         public DbSet<Contact> Contact { get; set; }
-        public DbSet<FaqEntity> FaqEntity { get; set; }
-        public DbSet<SidebarEntity> SidebarEntity { get; set; }
-        public DbSet<ContentEntity> ContentEntity { get; set; }
+        public DbSet<FaqEntity> Faq { get; set; }
+        public DbSet<SidebarEntity> Sidebar { get; set; }
+        public DbSet<Content> Content { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

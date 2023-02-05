@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using WayToHair.API.Filters;
 using WayToHair.Core.DTOs;
 using WayToHair.Core.Services;
@@ -8,7 +9,7 @@ using WayToHair.Core.WayToHairEntites;
 
 namespace WayToHair.API.Controllers
 {
-    [ValidateFilterAttribute]
+    [ValidateFilter]
     public class ContactsController : CustomBaseController
     {
         private readonly IMapper _mapper;
@@ -25,7 +26,7 @@ namespace WayToHair.API.Controllers
         {
             var contacts = await _service.GetAllAsync();
             var contactDtos = _mapper.Map<List<ContactDto>>(contacts.ToList());
-            return CreateActionResult(CustomResponseDto<List<ContactDto>>.Succces(200, contactDtos));
+            return CreateActionResult(CustomResponseDto<List<ContactDto>>.Succces((int)HttpStatusCode.OK, contactDtos));
         }
 
         [ServiceFilter(typeof(NotFoundFilter<Contact>))]
@@ -34,7 +35,7 @@ namespace WayToHair.API.Controllers
         {
             var contact = await _service.GetByIdAsync(id);
             var contactDto = _mapper.Map<ContactDto>(contact);
-            return CreateActionResult(CustomResponseDto<ContactDto>.Succces(20, contactDto));
+            return CreateActionResult(CustomResponseDto<ContactDto>.Succces((int)HttpStatusCode.OK, contactDto));
         }
 
 
@@ -42,14 +43,14 @@ namespace WayToHair.API.Controllers
         public async Task<IActionResult> Save(ContactDto contactDto)
         {
             var contact = await _service.AddAsync(_mapper.Map<Contact>(contactDto));
-            return CreateActionResult(CustomResponseDto<ContactDto>.Succces(200, _mapper.Map<ContactDto>(contact)));
+            return CreateActionResult(CustomResponseDto<ContactDto>.Succces((int)HttpStatusCode.OK, _mapper.Map<ContactDto>(contact)));
         }
 
         [HttpPut]
         public async Task<IActionResult> Update(ContactDto contactDto)
         {
             await _service.UpdateAsync(_mapper.Map<Contact>(contactDto));
-            return CreateActionResult(CustomResponseDto<NoContentDto>.Succces(204));
+            return CreateActionResult(CustomResponseDto<NoContentDto>.Succces((int)HttpStatusCode.OK));
         }
 
         [HttpDelete("{id}")]
@@ -57,7 +58,7 @@ namespace WayToHair.API.Controllers
         {
             var contactModel = await _service.GetByIdAsync(id);
             await _service.RemoveAsync(contactModel);
-            return CreateActionResult(CustomResponseDto<NoContentDto>.Succces(204));
+            return CreateActionResult(CustomResponseDto<NoContentDto>.Succces((int)HttpStatusCode.OK));
         }
     }
 
