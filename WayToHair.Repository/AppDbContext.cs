@@ -12,7 +12,7 @@ namespace WayToHair.Repository
         }
 
         public DbSet<Contact> Contact { get; set; }
-        public DbSet<FaqEntity> Faq { get; set; }
+        public DbSet<Faq> Faq { get; set; }
         public DbSet<SidebarEntity> Sidebar { get; set; }
         public DbSet<Content> Content { get; set; }
 
