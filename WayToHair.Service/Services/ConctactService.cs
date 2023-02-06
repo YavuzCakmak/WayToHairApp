@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using WayToHair.Core.Services;
 using WayToHair.Core.UnitOfWorks;
 using WayToHair.Core.WayToHairEntites;
 using WayToHair.Repository.Repositories;
+using WayToHair.Service.Util;
 
 namespace WayToHair.Service.Services
 {
@@ -16,11 +18,13 @@ namespace WayToHair.Service.Services
     {
         private readonly IContactRepository _contactRepository;
         private readonly IMapper _mapper;
+        private readonly IOptions<WayToHairSettings> WayToHairSetting ;
 
-        public ConctactService(IGenericRepository<Contact> repoistory, IUnitOfWork unitOfWork, IMapper mapper, IContactRepository contactRepository) : base(repoistory, unitOfWork)
+        public ConctactService(IGenericRepository<Contact> repoistory, IUnitOfWork unitOfWork, IMapper mapper, IContactRepository contactRepository, IOptions<WayToHairSettings> wayToHairSetting) : base(repoistory, unitOfWork)
         {
             _mapper = mapper;
             _contactRepository = contactRepository;
+            WayToHairSetting = wayToHairSetting;
         }
     }
 }

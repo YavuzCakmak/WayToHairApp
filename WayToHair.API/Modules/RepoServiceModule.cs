@@ -22,6 +22,7 @@ namespace WayToHair.API.Modules
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
 
 
+
             var apiAssembly = Assembly.GetExecutingAssembly();
             var repoAseembly = Assembly.GetAssembly(typeof(AppDbContext));
             var serviceAssembly = Assembly.GetAssembly(typeof(MapProfile));

@@ -15,6 +15,7 @@ using WayToHair.Repository.Repositories;
 using WayToHair.Repository.UnitOfWorks;
 using WayToHair.Service.Mapping;
 using WayToHair.Service.Services;
+using WayToHair.Service.Util;
 using WayToHair.Service.Validations;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,6 +42,11 @@ builder.Services.AddDbContext<AppDbContext>(
                 .LogTo(Console.WriteLine, LogLevel.Information)
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors());
+
+
+//Defaul AppSettings
+var appSettingsSection = builder.Configuration.GetSection("WayToHairSettings");
+builder.Services.Configure<WayToHairSettings>(appSettingsSection);
 
 
 //Default
