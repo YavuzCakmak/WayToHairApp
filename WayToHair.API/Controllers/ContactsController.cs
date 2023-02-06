@@ -6,6 +6,7 @@ using WayToHair.API.Filters;
 using WayToHair.Core.DTOs;
 using WayToHair.Core.Services;
 using WayToHair.Core.WayToHairEntites;
+using WayToHair.Service.Util;
 
 namespace WayToHair.API.Controllers
 {
@@ -44,6 +45,13 @@ namespace WayToHair.API.Controllers
         {
             var contact = await _service.AddAsync(_mapper.Map<Contact>(contactDto));
             return CreateActionResult(CustomResponseDto<ContactDto>.Succces((int)HttpStatusCode.OK, _mapper.Map<ContactDto>(contact)));
+        }
+
+        [HttpPost("SendMail")]
+        public async Task<IActionResult> SendMail(EmailModel emailModel)
+        {
+            await _service.SendMail(emailModel);
+            return CreateActionResult(CustomResponseDto<NoContentDto>.Succces((int)HttpStatusCode.OK));
         }
 
         [HttpPut]

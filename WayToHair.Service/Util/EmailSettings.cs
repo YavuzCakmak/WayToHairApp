@@ -10,5 +10,6 @@ namespace WayToHair.Service.Util
     {
         public string EmailMicroServiceUrl { get; set; }
         public string SmtpFromAddress { get; set; }
+        public string SmtpFromPassword { get; set; }
     }
 }
