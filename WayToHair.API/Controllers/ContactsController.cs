@@ -61,6 +61,12 @@ namespace WayToHair.API.Controllers
             return CreateActionResult(CustomResponseDto<NoContentDto>.Succces((int)HttpStatusCode.OK));
         }
 
+        [HttpGet("TEST")]
+        public string Test()
+        {
+            return "OK";
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {
