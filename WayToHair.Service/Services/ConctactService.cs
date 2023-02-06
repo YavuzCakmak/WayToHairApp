@@ -4,7 +4,6 @@ using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using MimeKit.Text;
-using WayToHair.Core.DTOs;
 using WayToHair.Core.Repositories;
 using WayToHair.Core.Services;
 using WayToHair.Core.UnitOfWorks;
