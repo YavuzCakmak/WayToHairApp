@@ -10,7 +10,7 @@ namespace WayToHair.Core.DTOs
     {
         public int? ParentId { get; set; }
         public string Description { get; set; }
-        public string IsView { get; set; }
+        public bool IsView { get; set; }
         public int Sequence { get; set; }
     }
 }
