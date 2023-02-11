@@ -9,8 +9,6 @@ namespace WayToHair.Core.WayToHairEntites
 {
     public class Faq : BaseEntity
     {
-        [Column("parent_id")]
-        public int? ParentId { get; set; }
         [Column("question")]
         public string? Question { get; set; }
         [Column("answer")]
