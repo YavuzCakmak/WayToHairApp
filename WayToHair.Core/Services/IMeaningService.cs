@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WayToHair.Core.WayToHairEntites;
 
-namespace WayToHair.Core.DTOs
+namespace WayToHair.Core.Services
 {
-    public abstract class BaseDto
+    public interface IMeaningService : IService<Meaning>
     {
-        public int Id { get; set; }
     }
 }

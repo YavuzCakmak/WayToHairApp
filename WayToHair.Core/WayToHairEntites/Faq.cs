@@ -9,10 +9,6 @@ namespace WayToHair.Core.WayToHairEntites
 {
     public class Faq : BaseEntity
     {
-        [Column("question")]
-        public string? Question { get; set; }
-        [Column("answer")]
-        public string? Answer { get; set; }
         [Column("is_view")]
         public bool? IsView { get; set; }
         [Column("sequence")]

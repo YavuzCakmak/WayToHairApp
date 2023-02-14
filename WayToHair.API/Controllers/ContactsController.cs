@@ -39,7 +39,6 @@ namespace WayToHair.API.Controllers
             return CreateActionResult(CustomResponseDto<ContactDto>.Succces((int)HttpStatusCode.OK, contactDto));
         }
 
-
         [HttpPost]
         public async Task<IActionResult> Save(ContactDto contactDto)
         {

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WayToHair.Core.DTOs
+namespace WayToHair.Core.Repositories
 {
-    public abstract class BaseDto
+    public interface IMeaningRepository
     {
-        public int Id { get; set; }
     }
 }

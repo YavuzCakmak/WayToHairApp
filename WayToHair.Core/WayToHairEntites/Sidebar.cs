@@ -11,8 +11,7 @@ namespace WayToHair.Core.WayToHairEntites
     {
         [Column("parent_id")]
         public int? ParentId { get; set; }
-        [Column("description")]
-        public string Description { get; set; }
+
         [Column("is_view")]
         public bool IsView { get; set; }
 

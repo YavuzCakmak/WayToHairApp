@@ -9,7 +9,6 @@ using WayToHair.Core.WayToHairEntites;
 
 namespace WayToHair.API.Controllers
 {
-    [ValidateFilter]
     public class FaqsController : CustomBaseController
     {
         private readonly IFaqService _faqService;
@@ -27,6 +26,13 @@ namespace WayToHair.API.Controllers
             var faqs = await _faqService.GetAllAsync();
             var faqsDtos = _mapper.Map<List<FaqDto>>(faqs.ToList());
             return CreateActionResult(CustomResponseDto<List<FaqDto>>.Succces((int)HttpStatusCode.OK, faqsDtos));
+        }
+
+        [HttpGet("GetAllFaqAndMeaning")]
+        public async Task<IActionResult> GetAllFaqAndMeaning([FromHeader] byte languageType)
+        {
+            var faqDtos = await _faqService.GetAllFaqAndMeaning(languageType);
+            return CreateActionResult(CustomResponseDto<List<FaqDto>>.Succces((int)HttpStatusCode.OK, faqDtos));
         }
 
 

@@ -17,6 +17,7 @@ namespace WayToHair.Service.Mapping
             CreateMap<Content,ContentDto>().ReverseMap(); 
             CreateMap<Faq,FaqDto>().ReverseMap(); 
             CreateMap<Sidebar,SidebarDto>().ReverseMap(); 
+            CreateMap<Meaning,MeaningDto>().ReverseMap(); 
         }
     }
 }

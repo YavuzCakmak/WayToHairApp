@@ -11,10 +11,7 @@ namespace WayToHair.Core.WayToHairEntites
     {
         [Column("sidebar_id")]
         public int? SidebarId { get; set; }
-        [Column("description")]
-        public string? Description { get; set; }
-        [Column("title")]
-        public string? Title { get; set; }
+
         [Column("is_view")]
         public bool IsView { get; set; }
         [Column("sequence")]
