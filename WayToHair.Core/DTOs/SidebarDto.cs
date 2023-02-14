@@ -8,6 +8,7 @@ namespace WayToHair.Core.DTOs
 {
     public class SidebarDto : BaseDto   
     {
+        public SidebarDto ChildObject { get; set; }
         public int? ParentId { get; set; }
         public string Description { get; set; }
         public bool IsView { get; set; }
