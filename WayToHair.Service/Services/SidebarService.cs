@@ -60,7 +60,7 @@ namespace WayToHair.Service.Services
                             {
                                 Label = meaningModel.Description,
                                 Href = meaningModel.Description,
-                                SubLabel = "Test"
+                                SubLabel = meaningModel.SubLabel
                             };
                         }
                     }

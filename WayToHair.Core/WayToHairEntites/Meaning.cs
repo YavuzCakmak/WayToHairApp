@@ -19,6 +19,9 @@ namespace WayToHair.Core.WayToHairEntites
         [Column("description")]
         public string? Description { get; set; }
 
+        [Column("sub_label")]
+        public string? SubLabel { get; set; }
+
         [Column("table_type")]
         public byte TableType { get; set; }
 
