@@ -23,9 +23,9 @@ namespace WayToHair.Core.WayToHairEntites
         public string? SubLabel { get; set; }
 
         [Column("table_type")]
-        public byte TableType { get; set; }
+        public int TableType { get; set; }
 
         [Column("language_type")]
-        public byte LanguageType { get; set; }
+        public int LanguageType { get; set; }
     }
 }
