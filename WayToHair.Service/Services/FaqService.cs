@@ -41,9 +41,7 @@ namespace WayToHair.Service.Services
                     {
                         Answer = selectedMeaning.Answer,
                         Question = selectedMeaning.Question,
-                        Sequence = faq.Sequence,
-                        Id = faq.Id,
-                        IsView = faq.IsView
+                        Sequence = faq.Sequence
                     });
                 }
             }
