@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace WayToHair.Core.DTOs
 {
-    public class FaqDto : BaseDto
+    public class FaqDto 
     {
-        public bool? IsView { get; set; }
         public int? Sequence { get; set; }
         public string Question { get; set; }
         public string Answer { get; set; }

@@ -56,16 +56,14 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(containersBuilder => containersBuilder.RegisterModule(new RepoServiceModule()));
 
 var app = builder.Build();
-
-app.UseSwagger();
-app.UseSwaggerUI();
-
-
 app.UseHttpsRedirection();
+app.UseRouting();
 
 app.UseCustomException();
 app.UseAuthorization();
 
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseCors(options =>
  options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());

@@ -29,7 +29,7 @@ namespace WayToHair.API.Controllers
         }
 
         [HttpGet("GetAllFaqAndMeaning")]
-        public async Task<IActionResult> GetAllFaqAndMeaning([FromHeader] byte languageType)
+        public async Task<IActionResult> GetAllFaqAndMeaning([FromQuery] byte languageType)
         {
             var faqDtos = await _faqService.GetAllFaqAndMeaning(languageType);
             return CreateActionResult(CustomResponseDto<List<FaqDto>>.Succces((int)HttpStatusCode.OK, faqDtos));
