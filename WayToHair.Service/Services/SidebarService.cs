@@ -46,7 +46,8 @@ namespace WayToHair.Service.Services
                         {
                             Id = sidebar.Id,
                             Label = meaningModel.Description,
-                            Href = "/"
+                            Href = "/",
+                            Sequence = sidebar.Sequence
                         });
                     }
                     else
@@ -56,7 +57,8 @@ namespace WayToHair.Service.Services
                         {
                             Id = sidebar.Id,
                             Label = meaningModel.Description,
-                            Href = englishHref.Description
+                            Href = englishHref.Description,
+                            Sequence = sidebar.Sequence
                         });
                     }
 
