@@ -39,13 +39,11 @@ namespace WayToHair.Service.Services
                 meaningModels = _meaningService.Where(x => x.TableType == Convert.ToInt32(Table.SIDEBAR)).ToList();
                 foreach (var sidebar in sidebars.ToList().Where(x => x.ParentId == null))
                 {
-                    var isSucces = false;
                     meaningModel = meaningModels.Find(x => x.DataId == sidebar.Id && x.LanguageType == languageType);
                     if (meaningModel != null)
                     {
-                        if (meaningModel.Description == "Anasayfa" && isSucces == false)
+                        if (meaningModel.Description == "Anasayfa")
                         {
-                            isSucces = true;
                             sidebarResponseDtos.Add(new SidebarResponseDto
                             {
                                 Id = sidebar.Id,
@@ -54,9 +52,8 @@ namespace WayToHair.Service.Services
                                 Sequence = sidebar.Sequence
                             });
                         }
-                        if (meaningModel.Description == "Home Page" && isSucces == false)
+                        if (meaningModel.Description == "Home Page")
                         {
-                            isSucces = true;
                             sidebarResponseDtos.Add(new SidebarResponseDto
                             {
                                 Id = sidebar.Id,
@@ -65,7 +62,7 @@ namespace WayToHair.Service.Services
                                 Sequence = sidebar.Sequence
                             });
                         }
-                        else
+                        else if (meaningModel.Description != "Anasayfa" && meaningModel.Description != "Home Page")
                         {
                             var englishHref = _meaningService.Where(x => x.DataId == sidebar.Id && x.TableType == Convert.ToInt32(Table.SIDEBAR) && x.LanguageType == (int)Language.EN).FirstOrDefault();
                             sidebarResponseDtos.Add(new SidebarResponseDto
