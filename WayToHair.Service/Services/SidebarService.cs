@@ -43,7 +43,7 @@ namespace WayToHair.Service.Services
                     meaningModel = meaningModels.Find(x => x.DataId == sidebar.Id && x.LanguageType == languageType);
                     if (meaningModel != null)
                     {
-                        if (meaningModel.Description == "Anasayfa")
+                        if (meaningModel.Description == "Anasayfa" && isSucces == false)
                         {
                             isSucces = true;
                             sidebarResponseDtos.Add(new SidebarResponseDto
@@ -56,6 +56,7 @@ namespace WayToHair.Service.Services
                         }
                         if (meaningModel.Description == "Home Page" && isSucces == false)
                         {
+                            isSucces = true;
                             sidebarResponseDtos.Add(new SidebarResponseDto
                             {
                                 Id = sidebar.Id,
