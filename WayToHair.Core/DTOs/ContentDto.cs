@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace WayToHair.Core.DTOs
 {
-    public class ContentDto : BaseDto
+    public class ContentDto 
     {
-        public int? SidebarId { get; set; }
-        public bool? IsView { get; set; }
-        public int? Sequence { get; set; }
+        public string Description { get; set; }
     }
 }

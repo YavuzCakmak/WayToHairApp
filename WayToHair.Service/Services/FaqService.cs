@@ -48,7 +48,7 @@ namespace WayToHair.Service.Services
                     }
                 }
             }
-            return faqDtos;
+            return faqDtos.OrderBy(x => x.Sequence).ToList();
         }
     }
 }

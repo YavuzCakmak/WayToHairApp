@@ -39,6 +39,13 @@ namespace WayToHair.API.Controllers
             return CreateActionResult(CustomResponseDto<ContentDto>.Succces((int)HttpStatusCode.OK, contentDto));
         }
 
+        [HttpGet("GetSidebarAndContent")]
+        public async Task<IActionResult> GetSidebarAndContent([FromQuery] byte sidebarId, [FromQuery] byte languageType)
+        {
+            var sidebarDtos = await _contentService.GetSidebarAndContent(sidebarId, languageType);
+            return CreateActionResult(CustomResponseDto<ContentDto>.Succces((int)HttpStatusCode.OK, sidebarDtos));
+        }
+
         [HttpPost]
         public async Task<IActionResult> Save(ContentDto contentDto)
         {

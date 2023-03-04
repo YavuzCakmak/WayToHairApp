@@ -52,6 +52,16 @@ namespace WayToHair.Service.Services
                                 Sequence = sidebar.Sequence
                             });
                         }
+                        if (meaningModel.Description == "Home Page")
+                        {
+                            sidebarResponseDtos.Add(new SidebarResponseDto
+                            {
+                                Id = sidebar.Id,
+                                Label = meaningModel.Description,
+                                Href = "/",
+                                Sequence = sidebar.Sequence
+                            });
+                        }
                         else
                         {
                             var englishHref = _meaningService.Where(x => x.DataId == sidebar.Id && x.TableType == Convert.ToInt32(Table.SIDEBAR) && x.LanguageType == (int)Language.EN).FirstOrDefault();
@@ -81,6 +91,7 @@ namespace WayToHair.Service.Services
                             {
                                 currentSidebar.ChildSideBarResponseDto.Add(new ChildSideBarResponseDto
                                 {
+                                    Id = childObject.Id,
                                     Label = meaningModel.Description,
                                     Href = currentSidebar.Href
                                 });
@@ -89,7 +100,7 @@ namespace WayToHair.Service.Services
                     }
                 }
             }
-            return sidebarResponseDtos;
+            return sidebarResponseDtos.OrderBy(x=> x.Sequence).ToList();
         }
     }
 }

@@ -39,7 +39,7 @@ namespace WayToHair.API.Controllers
         }
 
         [HttpGet("GetAllSidebarAndMeaning")]
-        public async Task<IActionResult> GetAllSidebarAndMeaning([FromHeader] byte languageType)
+        public async Task<IActionResult> GetAllSidebarAndMeaning([FromQuery] byte languageType)
         {
             var sidebarDtos = await _service.GetAllSidebarAndMeaning(languageType);
             return CreateActionResult(CustomResponseDto<List<SidebarResponseDto>>.Succces((int)HttpStatusCode.OK, sidebarDtos));
