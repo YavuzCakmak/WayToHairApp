@@ -39,11 +39,13 @@ namespace WayToHair.Service.Services
                 meaningModels = _meaningService.Where(x => x.TableType == Convert.ToInt32(Table.SIDEBAR)).ToList();
                 foreach (var sidebar in sidebars.ToList().Where(x => x.ParentId == null))
                 {
+                    var isSucces = false;
                     meaningModel = meaningModels.Find(x => x.DataId == sidebar.Id && x.LanguageType == languageType);
                     if (meaningModel != null)
                     {
                         if (meaningModel.Description == "Anasayfa")
                         {
+                            isSucces = true;
                             sidebarResponseDtos.Add(new SidebarResponseDto
                             {
                                 Id = sidebar.Id,
@@ -52,7 +54,7 @@ namespace WayToHair.Service.Services
                                 Sequence = sidebar.Sequence
                             });
                         }
-                        if (meaningModel.Description == "Home Page")
+                        if (meaningModel.Description == "Home Page" && isSucces == false)
                         {
                             sidebarResponseDtos.Add(new SidebarResponseDto
                             {
