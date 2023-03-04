@@ -40,27 +40,31 @@ namespace WayToHair.Service.Services
                 foreach (var sidebar in sidebars.ToList().Where(x => x.ParentId == null))
                 {
                     meaningModel = meaningModels.Find(x => x.DataId == sidebar.Id && x.LanguageType == languageType);
-                    if (meaningModel.Description == "Anasayfa")
+                    if (meaningModel != null)
                     {
-                        sidebarResponseDtos.Add(new SidebarResponseDto
+                        if (meaningModel.Description == "Anasayfa")
                         {
-                            Id = sidebar.Id,
-                            Label = meaningModel.Description,
-                            Href = "/",
-                            Sequence = sidebar.Sequence
-                        });
-                    }
-                    else
-                    {
-                        var englishHref = _meaningService.Where(x => x.DataId == sidebar.Id && x.TableType == Convert.ToInt32(Table.SIDEBAR) && x.LanguageType == (int)Language.EN).FirstOrDefault();
-                        sidebarResponseDtos.Add(new SidebarResponseDto
+                            sidebarResponseDtos.Add(new SidebarResponseDto
+                            {
+                                Id = sidebar.Id,
+                                Label = meaningModel.Description,
+                                Href = "/",
+                                Sequence = sidebar.Sequence
+                            });
+                        }
+                        else
                         {
-                            Id = sidebar.Id,
-                            Label = meaningModel.Description,
-                            Href = englishHref.Description,
-                            Sequence = sidebar.Sequence
-                        });
+                            var englishHref = _meaningService.Where(x => x.DataId == sidebar.Id && x.TableType == Convert.ToInt32(Table.SIDEBAR) && x.LanguageType == (int)Language.EN).FirstOrDefault();
+                            sidebarResponseDtos.Add(new SidebarResponseDto
+                            {
+                                Id = sidebar.Id,
+                                Label = meaningModel.Description,
+                                Href = englishHref.Description,
+                                Sequence = sidebar.Sequence
+                            });
+                        }
                     }
+                   
 
                 }
 
