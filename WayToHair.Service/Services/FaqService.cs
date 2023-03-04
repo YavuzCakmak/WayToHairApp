@@ -37,12 +37,15 @@ namespace WayToHair.Service.Services
                 foreach (var faq in faqs.ToList())
                 {
                     var selectedMeaning = faqMeanings.Find(x => x.DataId == faq.Id && x.LanguageType == languageType);
-                    faqDtos.Add(new FaqDto
+                    if (selectedMeaning != null)
                     {
-                        Answer = selectedMeaning.Answer,
-                        Question = selectedMeaning.Question,
-                        Sequence = faq.Sequence
-                    });
+                        faqDtos.Add(new FaqDto
+                        {
+                            Answer = selectedMeaning.Answer,
+                            Question = selectedMeaning.Question,
+                            Sequence = faq.Sequence
+                        });
+                    }
                 }
             }
             return faqDtos;

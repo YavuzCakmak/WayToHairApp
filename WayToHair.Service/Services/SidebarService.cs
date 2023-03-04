@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Data.SqlClient.DataClassification;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,12 +40,26 @@ namespace WayToHair.Service.Services
                 foreach (var sidebar in sidebars.ToList().Where(x => x.ParentId == null))
                 {
                     meaningModel = meaningModels.Find(x => x.DataId == sidebar.Id && x.LanguageType == languageType);
-                    sidebarResponseDtos.Add(new SidebarResponseDto
+                    if (meaningModel.Description == "Anasayfa")
                     {
-                        Id = sidebar.Id,
-                        Label = meaningModel.Description,
-                        Href = meaningModel.Description
-                    });
+                        sidebarResponseDtos.Add(new SidebarResponseDto
+                        {
+                            Id = sidebar.Id,
+                            Label = meaningModel.Description,
+                            Href = "/"
+                        });
+                    }
+                    else
+                    {
+                        var englishHref = _meaningService.Where(x => x.DataId == sidebar.Id && x.TableType == Convert.ToInt32(Table.SIDEBAR) && x.LanguageType == (int)Language.EN).FirstOrDefault();
+                        sidebarResponseDtos.Add(new SidebarResponseDto
+                        {
+                            Id = sidebar.Id,
+                            Label = meaningModel.Description,
+                            Href = englishHref.Description
+                        });
+                    }
+
                 }
 
                 var childObjects = sidebars.ToList().FindAll(x => x.ParentId != null);
@@ -56,12 +71,14 @@ namespace WayToHair.Service.Services
                         if (currentSidebar != null)
                         {
                             meaningModel = meaningModels.Find(x => x.DataId == childObject.Id && x.LanguageType == languageType);
-                            currentSidebar.ChildSideBarResponseDto = new ChildSideBarResponseDto
+                            if (meaningModel != null)
                             {
-                                Label = meaningModel.Description,
-                                Href = meaningModel.Description,
-                                SubLabel = meaningModel.SubLabel
-                            };
+                                currentSidebar.ChildSideBarResponseDto.Add(new ChildSideBarResponseDto
+                                {
+                                    Label = meaningModel.Description,
+                                    Href = currentSidebar.Href
+                                });
+                            }
                         }
                     }
                 }
