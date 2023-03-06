@@ -26,7 +26,7 @@ namespace WayToHair.Service.Services
         public async Task<List<FaqDto>> GetAllFaqAndMeaning(byte languageType)
         {
             List<FaqDto> faqDtos = new List<FaqDto>();
-            var faqs =  _faqService.GetAllAsync().Result;
+            var faqs = await _faqService.GetAllAsync();
             if (faqs != null)
             {
                 var faqMeanings = _meaningService.Where(x => x.TableType == Convert.ToInt32(Table.FAQ)).ToList();

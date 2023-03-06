@@ -1,8 +1,10 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 using WayToHair.API.Filters;
 using WayToHair.API.Middlewares;
 using WayToHair.API.Modules;
@@ -30,6 +32,12 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 
 builder.Services.AddCors();
 
+builder.Services.AddHttpsRedirection(options =>
+{
+    options.RedirectStatusCode = (int)HttpStatusCode.TemporaryRedirect;
+    options.HttpsPort = 443;
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -54,6 +62,7 @@ builder.Services.Configure<WayToHairSettings>(appSettingsSection);
 //Default
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(containersBuilder => containersBuilder.RegisterModule(new RepoServiceModule()));
+
 
 var app = builder.Build();
 app.UseHttpsRedirection();
