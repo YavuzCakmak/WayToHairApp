@@ -14,11 +14,13 @@ namespace WayToHair.API.Controllers
     {
         private readonly IContentService _contentService;
         private readonly IMapper _mapper;
+        private readonly IFaqService _faqService;
 
-        public ContentsController(IContentService contentService, IMapper mapper)
+        public ContentsController(IContentService contentService, IMapper mapper, IFaqService faqService)
         {
             _contentService = contentService;
             _mapper = mapper;
+            _faqService = faqService;
         }
 
         [HttpGet]
@@ -44,6 +46,13 @@ namespace WayToHair.API.Controllers
         {
             var sidebarDtos = await _contentService.GetSidebarAndContent(sidebarId, languageType);
             return CreateActionResult(CustomResponseDto<ContentDto>.Succces((int)HttpStatusCode.OK, sidebarDtos));
+        }
+
+        [HttpGet("GetAllFaqAndMeaning")]
+        public async Task<IActionResult> GetAllFaqAndMeaning([FromQuery] byte languageType)
+        {
+            var faqDtos = await _contentService.GetAllFaqAndMeaning(languageType);
+            return CreateActionResult(CustomResponseDto<List<FaqDto>>.Succces((int)HttpStatusCode.OK, faqDtos));
         }
 
         [HttpPost]
